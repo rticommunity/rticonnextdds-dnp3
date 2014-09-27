@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/BUILD_ARCH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/BUILD_ARCH/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/BUILD_ARCH/value=${DNP3_BUILD_ARCH}
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/DEBUG/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/DEBUG/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/DEBUG/value=1
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/append=true
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1954891771/appendContributed=true
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BASE_D/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BASE_D/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BASE_D/value=${BASE_D}
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BUILD_ARCH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BUILD_ARCH/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/BUILD_ARCH/value=${DNP3_BUILD_ARCH}
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/append=true
+environment/project/cdt.managedbuild.config.gnu.cross.exe.release.1324299985/appendContributed=true

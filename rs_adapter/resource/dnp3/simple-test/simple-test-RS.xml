@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ (c) 2005-2014 Copyright, Real-Time Innovations, Inc.  All rights reserved.
+ RTI grants Licensee a license to use, modify, compile, and create derivative
+ works of the Software.  Licensee has the right to distribute object form only
+ for use with RTI products.  The Software is provided "as is", with no warranty
+ of any type, including any warranty for fitness for any purpose. RTI is under
+ no obligation to maintain or support the Software.  RTI shall not be liable for
+ any incidental or consequential damages arising out of the use or inability to
+ use the software.
+ -->
+<dds version="5.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../routing-service/resource/schema/rti_routing_service.xsd">
+
+	<types>
+            <include file="../../idl/SimpleAPDU.xml"/>
+	</types>
+
+
+	<adapter_library name="adapters">
+		<adapter_plugin name="DNP3Adapter">
+			<dll>../../../../lib/$(PLATFORM)/dnp3adapter</dll>
+			<create_function>DNP3Adapter_create</create_function>
+		</adapter_plugin>
+	</adapter_library>
+
+
+
+	<routing_service name="rs1">
+
+		<domain_route name="DDS-DNP3-bridge">
+
+			<!-- Input connection from DDS domain -->
+			<participant_1>
+				<domain_id>$(DNP3_DOMAIN)</domain_id>
+				<registered_type name="APDU"
+					type_name="com::rti::dnp3::SimpleAPDU" />
+			</participant_1>
+
+			<!-- Output connection to DNP3 -->
+			<connection_2 plugin_name="adapters::DNP3Adapter">
+				<registered_type name="APDU"
+					type_name="com::rti::dnp3::SimpleAPDU" />
+				<property>
+					<value>
+						<element>
+							<name>dnp3config</name>
+							<value>simple-test-DNP3.conf</value>
+						</element>
+					</value>
+				</property>
+			</connection_2>
+
+			<session name="main">
+
+				<route name="Master102-11-to-DNP3">
+					<dds_input participant="1">
+						<topic_name>DNP3Bus</topic_name>
+						<content_filter>
+							<expression>src.address = 102 AND dest.address = 11</expression>
+						</content_filter>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_input>
+					<output>
+						<registered_type_name>APDU</registered_type_name>
+						<stream_name>Master102-to-11-dnp3-output</stream_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</output>
+				</route>
+
+				<route name="Slave11-102-to-DNP3">
+					<dds_input participant="1">
+						<topic_name>DNP3Bus</topic_name>
+						<content_filter>
+							<expression>src.address = 11 AND dest.address = 102</expression>
+						</content_filter>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_input>
+					<output>
+						<registered_type_name>APDU</registered_type_name>
+						<stream_name>Slave11-to-102-dnp3-output</stream_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</output>
+				</route>
+				
+				<route name="Slave11-to-DDS">
+					<input connection="2">
+						<stream_name>Slave11-out</stream_name>
+						<registered_type_name>APDU</registered_type_name>
+						<property>
+							<value>
+								<element>
+									<name>dnp3filter</name>
+									<value>src = 11</value>
+								</element>
+							</value>
+						</property>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</input>
+					<dds_output>
+						<topic_name>DNP3BusReplica</topic_name>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_output>
+				</route>
+				<route name="Master102-to-DDS">
+					<input connection="2">
+						<stream_name>Master102-out</stream_name>
+						<registered_type_name>APDU</registered_type_name>
+						<property>
+							<value>
+								<element>
+									<name>dnp3filter</name>
+									<value>src = 102</value>
+								</element>
+							</value>
+						</property>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</input>
+					<dds_output>
+						<topic_name>DNP3BusReplica</topic_name>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_output>
+				</route>
+				
+
+			</session>
+
+		</domain_route>
+
+	</routing_service>
+	
+	<routing_service name="rs2">
+		<domain_route name="DDS-to-DDS">
+			<participant_1>
+				<domain_id>$(DNP3_DOMAIN)</domain_id>
+				<registered_type name="APDU"
+					type_name="com::rti::dnp3::SimpleAPDU" />
+			</participant_1>
+			<participant_2>
+				<domain_id>$(DNP3_DOMAIN)</domain_id>
+				<registered_type name="APDU"
+					type_name="com::rti::dnp3::SimpleAPDU" />
+			</participant_2>
+			<session name="main">
+				<route name="dnp3BusReplica-mirror">
+					<dds_input participant="1">
+						<topic_name>DNP3BusReplica</topic_name>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_input>
+					<dds_output>
+						<topic_name>DNP3Bus</topic_name>
+						<registered_type_name>APDU</registered_type_name>
+						<creation_mode>IMMEDIATE</creation_mode>
+					</dds_output>
+				</route>
+			</session>
+		</domain_route>
+	</routing_service>
+</dds>
+<!-- -->
