@@ -1,4 +1,4 @@
-rticonnextdds-dnp3/
+rticonnextdds-dnp3*
 *.tgz
 lib/
 objs/

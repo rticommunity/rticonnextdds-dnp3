@@ -291,10 +291,10 @@ test: build
 ######## package targets (see "cleanup targets" for cleaning package output)
 DOWNLOADS_DIR := ../build
 
-PACKAGE_BASENAME = rticonnextdds-dnp3
-PACKAGE_DIR = $(DOWNLOADS_DIR)/$(PACKAGE_BASENAME)
 PACKAGE_VERSION = $(shell git describe)
-PACKAGE_BUNDLE = $(PACKAGE_BASENAME)_$(PACKAGE_VERSION).tgz
+PACKAGE_BASENAME = rticonnextdds-dnp3-$(PACKAGE_VERSION)
+PACKAGE_DIR = $(DOWNLOADS_DIR)/$(PACKAGE_BASENAME)
+PACKAGE_BUNDLE = $(PACKAGE_BASENAME).tgz
 PACKAGE_OUTPUT_DIRS = $(PACKAGE_DIR)
 
 # the list of files we should package in the rs_adapter folder will be in
@@ -343,7 +343,7 @@ packageList :
 	
 
 packageClean:
-	rm -rf $(PACKAGE_DIR)/../$(PACKAGE_BASENAME)_*.tgz $(PACKAGE_DIR) 
+	rm -rf $(PACKAGE_DIR)/../$(PACKAGE_BASENAME)-*.tgz $(PACKAGE_DIR) 
 
 $(PACKAGE_DIR)/rs_adapter/% : \
 	    $(PACKAGE_DIR)/rs_adapter.dir \
