@@ -123,7 +123,7 @@ Example:
 
 		$ DEBUG=1 \
 		PLATFORM=i86Linux3.xgcc4.6.3 \
-		DNP3_HOME=../../../dnp3 \
+		DNP3_HOME=../../dnp3 \
 		make
 	
 		$ ls ../lib/i86Linux3.xgcc4.6.3/
@@ -135,7 +135,7 @@ Example:
 Example:
 
 		$ DEBUG=1 \
-		DNP3_HOME=../../../dnp3 \
+		DNP3_HOME=../../dnp3 \
 		PLATFORM=i86Linux3.xgcc4.6.3 \
 		make test
 	
@@ -204,7 +204,7 @@ Example
 
 		$ DEBUG=1 \
 		PLATFORM=i86Linux3.xgcc4.6.3 \
-		DNP3_HOME=../../../dnp3 \
+		DNP3_HOME=../../dnp3 \
 		NDDSHOME=~/RTI/ndds.5.1.0 \
 		ROUTER_HOME=~/RTI/RTI_Routing_Service_5.1.0 \
 		make
@@ -238,7 +238,7 @@ The simplest way to invoke the test is via the make test target, as follows.
 		DDS_DOMAIN=42 \
 		DEBUG=1 \
 		PLATFORM=i86Linux3.xgcc4.6.3 \
-		DNP3_HOME=../../../dnp3 \
+		DNP3_HOME=../../dnp3 \
 		NDDSHOME=~/RTI/ndds.5.1.0 \
 		ROUTER_HOME=~/RTI/RTI_Routing_Service_5.1.0 \
 		make test
@@ -264,7 +264,7 @@ Create package for distribution:
 
 		$ DEBUG=1 \
 		PLATFORM=i86Linux3.xgcc4.6.3 \
-		DNP3_HOME=../../../dnp3 \
+		DNP3_HOME=../../dnp3 \
 		NDDSHOME=~/RTI/ndds.5.1.0 \
 		ROUTER_HOME=~/RTI/RTI_Routing_Service_5.1.0 \
 		make package
